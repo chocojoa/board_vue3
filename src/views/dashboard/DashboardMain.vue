@@ -38,7 +38,7 @@
     data() {
       return {        
         preTitle : 'Dashboard',
-        title : '대쉬보드',
+        title : '대시보드',
       }
     }
   }

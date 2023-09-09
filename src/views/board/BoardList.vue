@@ -48,7 +48,7 @@ DataTable.use(DataTablesCore);
               </div>
               <div class="col-md-4 col-sm-12">
                 <label class="form-label" for="title">작성일</label>
-                <div class="row g-2 align-items-center input-daterange">
+                <div class="row g-2 align-items-center">
                   <div class="col">
                     <input type="text" class="form-control" id="startCreatedDate" v-model="searchData.startCreatedDate" @keyup.enter="searchBoard" />
                   </div>
@@ -63,7 +63,7 @@ DataTable.use(DataTablesCore);
             </div>
             
             <!-- Datatables -->
-            <DataTable :ajax="ajax" :options="options" class="display" ref="table">
+            <DataTable :ajax="dataTable" :options="options" class="display" ref="table">
               <thead>
                 <tr>
                   <th>No</th>
@@ -106,7 +106,7 @@ DataTable.use(DataTablesCore);
           startCreatedDate : '',
           endCreatedDate : '',
         },
-        ajax : {
+        dataTable : {
           type : 'POST',
           url : '/api/boards',
           data : function (data) {

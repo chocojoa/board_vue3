@@ -41,8 +41,7 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       redirect: { name : 'error' }
     }
-  ],
-  linkActiveClass: 'active'
+  ]
 })
 
 export default router
