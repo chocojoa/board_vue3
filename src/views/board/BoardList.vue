@@ -37,26 +37,26 @@ DataTable.use(DataTablesCore);
               <div class="col-md-4 col-sm-12">
                 <label class="form-label" for="title">제목</label>
                 <div>
-                    <input type="text" class="form-control" id="title" name="title" @keyup.enter="searchBoard" />
+                    <input type="text" class="form-control" id="title" v-model="searchData.title" @keyup.enter="searchBoard" />
                 </div>
               </div>
               <div class="col-md-4 col-sm-12">
                 <label class="form-label" for="title">작성자</label>
                 <div>
-                    <input type="text" class="form-control" id="userName" name="userName" @keyup.enter="searchBoard" />
+                    <input type="text" class="form-control" id="userName" v-model="searchData.userName" @keyup.enter="searchBoard" />
                 </div>
               </div>
               <div class="col-md-4 col-sm-12">
                 <label class="form-label" for="title">작성일</label>
                 <div class="row g-2 align-items-center input-daterange">
                   <div class="col">
-                    <input type="text" class="form-control" id="startCreatedDate" name="startCreatedDate" @keyup.enter="searchBoard" />
+                    <input type="text" class="form-control" id="startCreatedDate" v-model="searchData.startCreatedDate" @keyup.enter="searchBoard" />
                   </div>
                   <div class="col-auto">
                     ~
                   </div>
                   <div class="col">
-                    <input type="text" class="form-control" id="endCreatedDate" name="endCreatedDate" @keyup.enter="searchBoard" />
+                    <input type="text" class="form-control" id="endCreatedDate" v-model="searchData.endCreatedDate" @keyup.enter="searchBoard" />
                   </div>
                 </div>
               </div>
@@ -94,20 +94,27 @@ DataTable.use(DataTablesCore);
 
   export default {
     data() {
+      let $vm = this;
       let category = this.$route.query.category;
 
       return {
         preTitle : 'Board',
-        title : '게시판',        
+        title : '게시판',
+        searchData : {
+          title : '',
+          userName : '',
+          startCreatedDate : '',
+          endCreatedDate : '',
+        },
         ajax : {
           type : 'POST',
           url : '/api/boards',
           data : function (data) {
             data.category = category;
-            data.title = document.getElementById('title').value;
-            data.userName = document.getElementById('userName').value;
-            data.startCreatedDate = document.getElementById('startCreatedDate').value;
-            data.endCreatedDate = document.getElementById('endCreatedDate').value;
+            data.title = $vm.searchData.title;
+            data.userName = $vm.searchData.userName;
+            data.startCreatedDate = $vm.searchData.startCreatedDate;
+            data.endCreatedDate = $vm.searchData.endCreatedDate;
             data['order'].forEach(function(item, index) {
               data['order'][index]['column'] = data['columns'][item.column]['data'];
             });
