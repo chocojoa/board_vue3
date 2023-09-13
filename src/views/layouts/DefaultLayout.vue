@@ -5,9 +5,9 @@ import NavView from './NavView.vue'
 </script>
 
 <template>
-    <HeaderView />
-    <NavView />
-    <div class="page-wrapper">
-        <RouterView />
-    </div>
+	<HeaderView />
+	<NavView />
+	<div class="page-wrapper">
+		<RouterView />
+	</div>
 </template>

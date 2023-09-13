@@ -1,3 +1,6 @@
+<script setup>
+import { useAuthStore } from '../../store';
+</script>
 <template>
 	<header class="navbar navbar-expand-md navbar-light d-print-none">
 		<div class="container-xl">
@@ -17,15 +20,31 @@
 						<path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
 					</svg>
 					<div class="d-none d-xl-block ps-2">
-							<span sec:authentication="principal.userDTO.userName"></span>
-							(<span sec:authentication="principal.userDTO.email"></span>)
+							<span>{{ userName }} ({{ email }})</span>
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a th:href="@{/user/profile(email=${#authentication.name})}" class="dropdown-item">계정정보</a>
-					<a th:href="@{/auth/logOut}" class="dropdown-item">로그아웃</a>
+					<a class="dropdown-item">계정정보</a>
+					<a class="dropdown-item" @click="logout">로그아웃</a>
 				</div>
 			</div>
 		</div>
 	</header>
 </template>
+<script>
+	const authStore = useAuthStore();
+	export default {
+		data() {
+			return { 
+				userName: authStore.user.userName,
+				email : authStore.user.email,
+			}
+		},
+		methods : {
+			logout() {
+				authStore.logout();
+				this.$router.push({name: 'login' });
+			}
+		}
+	}
+</script>

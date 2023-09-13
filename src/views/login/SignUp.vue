@@ -7,9 +7,9 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-    <div class="border-top-wide border-primary d-flex flex-column">
-        <div class="page page-center" style="height: 99vh">
-            <div class="container container-tight py-4">
+	<div class="border-top-wide border-primary d-flex flex-column">
+		<div class="page page-center" style="height: 99vh">
+			<div class="container container-tight py-4">
 				<div class="card card-md">
 					<form>
 						<div class="card-body">
@@ -36,7 +36,7 @@ import { RouterLink } from 'vue-router';
 					</form>
 				</div>
 				<div class="text-center text-muted mt-3">
-					이미 계정이 있습니까? <RouterLink :to="{ name: 'signIn'}">로그인</RouterLink>
+					이미 계정이 있습니까? <RouterLink :to="{ name: 'login'}">로그인</RouterLink>
 				</div>
 			</div>
 		</div>
@@ -44,62 +44,63 @@ import { RouterLink } from 'vue-router';
 
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                formData : {
-                    userName : '',
-                    email : '',
-                    password : ''
-                }
-            };
-        },
-        methods: {
-            validateUser(event) {
-                let $vm = this;
-                Swal.fire({
-                    title: '계정생성 하시겠습니까?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    focusConfirm: false,
-                    confirmButtonText: '저장',
-                    cancelButtonText: '취소'
-                }).then((result) => {
-                    if(result.isConfirmed) {
-                        let form = document.querySelector('form');
-                        if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        } else {
-                        $vm.createUser($vm.formData);
-                        }
-                        form.classList.add('was-validated');
-                    }
-                });
-            },
-            createUser(jsonData){
-                let $vm = this;
-                axios({
-                    method: 'POST',
-                    url: '/api/user',
-                    data: jsonData,
-                    headers: { 'Content-Type': 'application/json'}
-                }).then(function () {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '저장되었습니다.',
-                        timer: 1500,
-                    }).then(() => {
-                        $vm.$router.push({name: 'signIn'});
-                    });
-                }).catch(function (error) {
-                    Swal.fire({
+	export default {
+		data() {
+			return {
+				formData : {
+					userName : '',
+					email : '',
+					password : '',
+					createdBy : 0
+				}
+			};
+		},
+		methods: {
+			validateUser(event) {
+				let $vm = this;
+				Swal.fire({
+					title: '계정생성 하시겠습니까?',
+					icon: 'question',
+					showCancelButton: true,
+					focusConfirm: false,
+					confirmButtonText: '저장',
+					cancelButtonText: '취소'
+				}).then((result) => {
+					if(result.isConfirmed) {
+						let form = document.querySelector('form');
+						if (!form.checkValidity()) {
+							event.preventDefault();
+							event.stopPropagation();
+						} else {
+							$vm.createUser();
+						}
+						form.classList.add('was-validated');
+					}
+				});
+			},
+			createUser(){
+				let $vm = this;
+				axios({
+					method: 'POST',
+					url: '/api/auth/signUp',
+					data: $vm.formData,
+					headers: { 'Content-Type': 'application/json'}
+				}).then(function () {
+					Swal.fire({
+						icon: 'success',
+						title: '저장되었습니다.',
+						timer: 1500,
+					}).then(() => {
+						$vm.$router.push({name: 'login'});
+					});
+				}).catch(function (error) {
+					Swal.fire({
 						icon: 'error',
 						title: '에러가 발생하였습니다.',
 						text: error.statusText
-                    });
-                });
-            }            
-        }
-    }
+					});
+				});
+			}
+		}
+	}
 </script>

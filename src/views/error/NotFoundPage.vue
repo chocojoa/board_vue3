@@ -1,6 +1,6 @@
 <template>
 
-    <div class="border-top-wide border-primary d-flex flex-column">
+	<div class="border-top-wide border-primary d-flex flex-column">
 		<div class="page page-center" style="height: 99vh">
 			<div class="container container-tight py-4">
 				<div class="empty">
@@ -15,20 +15,20 @@
 								<line x1="5" y1="12" x2="11" y2="18" />
 								<line x1="5" y1="12" x2="11" y2="6" />
 							</svg>
-							처음으로 이동                        
+							처음으로 이동
 						</RouterLink>
-                    </div>
-                </div>
-            </div>
-        </div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </template>
 <script>
-    export default {        
-        data() {
-            return {                
-            }
-        }        
-    }
+	export default {
+		data() {
+			return {
+			}
+		}
+	}
 </script>
