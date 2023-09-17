@@ -1,5 +1,5 @@
 <script setup>
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store';
 import Swal from 'sweetalert2';
 </script>
 
