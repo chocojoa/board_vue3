@@ -9,7 +9,7 @@ import '@tabler/core/dist/css/tabler.min.css'
 const app = createApp(App)
 
 // Pinia 초기화
-const pinia = createPinia();
+const pinia = createPinia()
 app.use(pinia)
 
 app.use(router)

@@ -1,14 +1,14 @@
-import { defineStore, createPinia } from 'pinia'
+import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const pinia = createPinia();
+const piniaState = JSON.parse(localStorage.getItem('piniaState'));
 
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
-        isAuthenticated: false,
-        user : null,
-        token: null,
+        isAuthenticated: piniaState?.isAuthenticated || false,
+        user : piniaState?.user || '',
+        token: piniaState?.token || '',
     }),
     actions: {
         async login(credentials) {
@@ -30,12 +30,12 @@ export const useAuthStore = defineStore({
             } catch(error) {
                 console.log('로그인 실패 : ' + error);
                 throw error;
-            }            
+            }  
         },
         logout() {
             this.isAuthenticated = false;
             this.user = null;
             this.token = null;
-        },
-    }
+        }
+    },
 });

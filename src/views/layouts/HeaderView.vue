@@ -44,6 +44,9 @@ import { useAuthStore } from '../../store';
 			logout() {
 				authStore.logout();
 				this.$router.push({name: 'login' });
+
+				// 로그아웃 시 로그인 정보를 Local Storage에서 삭제
+				localStorage.removeItem('piniaState');
 			}
 		}
 	}

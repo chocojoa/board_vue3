@@ -1,5 +1,6 @@
 <script setup>
-import { useAuthStore } from '@/store';
+import { useAuthStore } from '@/store/authStore';
+import Swal from 'sweetalert2';
 </script>
 
 <template>
@@ -89,11 +90,18 @@ import { useAuthStore } from '@/store';
 						email: this.email,
 						password: this.password
 					});
+
+					// 스토어 상태를 Local Storage에 저장
+					localStorage.setItem('piniaState', JSON.stringify(authStore.$state));					
 					
 					// 로그인 성공 후 리다이렉트 또는 다른 작업 수행
 					this.$router.push('/');
 				} catch (error) {
-					console.log(error);
+					Swal.fire({
+						icon: 'error',
+						title: '에러가 발생하였습니다.',
+						text: error.message
+					});
 				}
 			}
 		}

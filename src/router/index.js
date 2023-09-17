@@ -55,7 +55,7 @@ router.beforeEach(async (to, from, next) => {
 		}
 	}else{
 		// 로그인이 필요하지 않은 라우트인 경우
-		next();    
+		next();
 	}
 });
 
