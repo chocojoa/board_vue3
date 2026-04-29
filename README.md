@@ -1,4 +1,4 @@
-# board_vue3_v2
+# board_vue3
 
 Vue 3 + shadcn-vue 기반 게시판 프론트엔드 프로젝트입니다.  
 `board_spring-boot` (Spring Boot + JWT + RBAC) 백엔드와 연동합니다.
